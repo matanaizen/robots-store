@@ -1,0 +1,21 @@
+<header>
+  <nav class="navbar">
+    <a href="/" class="logo">Robots Store</a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <% if (user) { %>
+      <li><a href="/cart">Cart</a></li>
+      <li><a href="/profile">Profile</a></li>
+      <% if(user.isAdmin) { %>
+      <li><a href="/admin">Admin Area</a></li>
+      <li><a href="/statistics">Statistics</a></li>
+      <% } %>
+      <li><a href="/about">About</a></li>
+      <li><a href="/logout" class="log-out-button">Logout</a></li>
+      <% } else { %>
+      <li><a href="/login">Login</a></li>
+      <li><a href="/register">Register</a></li>
+      <% } %>
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../partials/head-links') %>
+    <title>Anime Product Store</title>
+  </head>
+  <body>
+    <%- include('../partials/header') %>
+
+    <main class="home-container">
+      <h1>Welcome to robots Product Store</h1>
+      <p>Discover our exclusive collection of robot products!</p>
+
+      <div class="categories">
+        <h2>Shop by Category</h2>
+        <ul>
+          <% categories.forEach(category => { %>
+          <li>
+            <a href="/category/<%= category._id %>"><%= category.name %></a>
+          </li>
+          <% }) %>
+        </ul>
+      </div>
+    </main>
+
+    <%- include('../partials/footer') %>
+  </body>
+</html>

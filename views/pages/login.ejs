@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="google-signin-client_id"
+      content="894973078746-efmnh3t9drsnudotq6qhmst0stgilokn.apps.googleusercontent.com.apps.googleusercontent.com"
+    />
+    <%- include('../partials/head-links') %>
+    <title>Login</title>
+  </head>
+  <body>
+    <%- include('../partials/header') %>
+    <main class="auth-form-container">
+      <h1>Login</h1>
+      <form class="auth-form login-form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+        <button type="submit">Login</button>
+      </form>
+      <div class="message"></div>
+      <a href="/register">Don't have an account? Register here</a>
+    </main>
+    <%- include('../partials/footer') %>
+  </body>
+</html>

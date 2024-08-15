@@ -1,0 +1,73 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("/assets/Roboto-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/assets/Roboto-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-display: swap;
+}
+
+html {
+  font-family: Roboto, sans-serif;
+}
+
+body {
+  font-family: Roboto "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+}
+
+.logo {
+  color: white;
+  font-size: 1.8em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+  padding: 8px 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 5px;
+}
+
+.nav-links a:hover {
+  background-color: #4caf50;
+  color: white;
+}
+
+.nav-links a.log-out-button {
+  background-color: #e92929;
+}
+
+.nav-links a.log-out-button:hover {
+  background-color: #ff3d3d;
+}
