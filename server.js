@@ -7,8 +7,11 @@ const path = require("path");
 
 const seedDatabase = require("./seed");
 
+const checkLoggedInUser = require("./middleware/checkLoggedInUser");
+
 
 const userRoutes = require("./routes/user");
+const categoryRoutes = require("./routes/category");
 
 const app = express();
 
@@ -47,6 +50,8 @@ app.use((req, res, next) => {
 });
 
 app.use(userRoutes);
+app.use(checkLoggedInUser, categoryRoutes);
+app.use(checkLoggedInUser, cartRoutes);
 
 mongoose
   .connect("mongodb://matan:123456@localhost:27017/anime-db?authSource=admin")

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../partials/head-links') %>
+    <title><%= category.name %> - Anime Products</title>
+  </head>
+  <body>
+    <%- include('../partials/header') %>
+
+    <main class="category-container">
+      <div class="back-button-container">
+        <a class="back-button" href="/">Back</a>
+      </div>
+      <h1><%= category.name %></h1>
+      <form class="search-form">
+        <input
+          type="text"
+          id="query"
+          name="query"
+          placeholder="Search in this category..."
+        />
+        <input
+          type="number"
+          id="minPrice"
+          name="minPrice"
+          placeholder="Min Price"
+          min="0"
+        />
+        <input
+          type="number"
+          id="maxPrice"
+          name="maxPrice"
+          placeholder="Max Price"
+          min="0"
+        />
+        <button type="submit">Search</button>
+        </form>
+      </form>
+      <div class="product-list" data-category-id="<%= category._id %>">
+        <% products.forEach(product => { %>
+        <div class="product-item">
+          <img src="<%= product.imageUrl %>" alt="<%= product.name %>" />
+          <h2><%= product.name %></h2>
+          <p><%= product.description %></p>
+          <p>Price: $<%= product.price %></p>
+          <button class="add-to-cart" data-product-id="<%= product._id %>">
+            Add to Cart
+          </button>
+        </div>
+        <% }) %>
+      </div>
+    </main>
+    <%- include('../partials/footer') %>
+  </body>
+</html>
