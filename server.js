@@ -12,6 +12,7 @@ const checkLoggedInUser = require("./middleware/checkLoggedInUser");
 
 const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
+const cartRoutes = require("./routes/cart");
 
 const app = express();
 

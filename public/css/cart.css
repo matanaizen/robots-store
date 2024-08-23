@@ -1,0 +1,144 @@
+.cart-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.cart-container h1 {
+  font-size: 3em;
+  color: #4caf50;
+  margin-bottom: 30px;
+}
+
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.cart-item img {
+  max-width: 100px;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.cart-item-details h2 {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.cart-item-details p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.order-now-button {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.order-now-button:hover {
+  background-color: #45a049;
+}
+
+.cart-list p {
+  font-size: 1.5em;
+}
+
+@media (max-width: 768px) {
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-item img {
+    margin-bottom: 15px;
+    max-width: 100%;
+  }
+
+  .cart-total {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .order-now-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.cart-item-quantity {
+  width: 50px;
+  margin-right: 10px;
+}
+
+.update-quantity-button {
+  padding: 5px 10px;
+  font-size: 1em;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.update-quantity-button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.update-quantity-button:active {
+  transform: translateY(0);
+  background-color: #388e3c;
+}
+
+.remove-item-button {
+  padding: 5px 10px;
+  font-size: 1em;
+  color: white;
+  background-color: #f44336;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.remove-item-button:hover {
+  background-color: #e53935;
+  transform: translateY(-2px);
+}

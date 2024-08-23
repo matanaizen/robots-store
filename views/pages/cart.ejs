@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../partials/head-links') %>
+    <title>Shopping Cart</title>
+  </head>
+  <body>
+    <%- include('../partials/header') %>
+    <main class="cart-container">
+      <h1>Your Cart</h1>
+
+      <div class="cart-list">
+        <% if (cart.length > 0) { %> <% cart.forEach(item => { %>
+        <div class="cart-item">
+          <img
+            src="<%= item.product.imageUrl %>"
+            alt="<%= item.product.name %>"
+          />
+          <div class="cart-item-details">
+            <h2><%= item.product.name %></h2>
+            <p class="cart-item-price">Price: $<%= item.product.price %></p>
+            <label for="quantity-<%= item.product._id %>">Quantity:</label>
+            <input
+              type="number"
+              class="cart-item-quantity"
+              id="quantity-<%= item.product._id %>"
+              data-product-id="<%= item.product._id %>"
+              value="<%= item.quantity %>"
+              min="1"
+            />
+            <button
+              class="update-quantity-button"
+              data-product-id="<%= item.product._id %>"
+            >
+              Update
+            </button>
+            <button
+              class="remove-item-button"
+              data-product-id="<%= item.product._id %>"
+            >
+              Remove
+            </button>
+            <p class="cart-item-total">
+              Total: $<span class="total-price"
+                ><%= (item.quantity * item.product.price).toFixed(2) %></span
+              >
+            </p>
+          </div>
+        </div>
+        <% }) %>
+        <div class="cart-total">
+          <p>
+            Total: $<span class="overall-total"
+              ><%= Number(cart.reduce((total, item) => total + item.quantity *
+              item.product.price, 0)).toFixed(2) %></span
+            >
+          </p>
+          <button class="order-now-button">Order Now</button>
+        </div>
+        <% } else { %>
+        <p>Your cart is empty.</p>
+        <% } %>
+      </div>
+    </main>
+    <%- include('../partials/footer') %>
+  </body>
+</html>

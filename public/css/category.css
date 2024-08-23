@@ -1,0 +1,135 @@
+.back-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.back-button {
+  color: black;
+}
+.category-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.category-container h1 {
+  font-size: 3em;
+  color: #4caf50;
+  margin-bottom: 30px;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.search-form input[type="text"],
+.search-form input[type="number"] {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.search-form button {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-form button:hover {
+  background-color: #45a049;
+}
+
+.category-container .product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.product-item {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.product-item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.product-item h2 {
+  font-size: 1.5em;
+  color: #4caf50;
+  margin-bottom: 10px;
+}
+
+.product-item p {
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.product-item button {
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.product-item button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .category-container h1 {
+    font-size: 2.5em;
+  }
+
+  .search-form {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .search-form input[type="text"],
+  .search-form input[type="number"] {
+    width: 100%;
+  }
+
+  .search-form button {
+    width: 100%;
+  }
+
+  .product-list {
+    grid-template-columns: 1fr;
+  }
+
+  .product-item h2 {
+    font-size: 1.2em;
+  }
+
+  .product-item button {
+    font-size: 0.9em;
+  }
+}
