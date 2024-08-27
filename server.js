@@ -9,10 +9,13 @@ const seedDatabase = require("./seed");
 
 const checkLoggedInUser = require("./middleware/checkLoggedInUser");
 
+const Category = require("./models/category");
+const Product = require("./models/product");
 
 const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
 const cartRoutes = require("./routes/cart");
+const checkoutRoutes = require("./routes/checkout");
 
 const app = express();
 
@@ -53,6 +56,7 @@ app.use((req, res, next) => {
 app.use(userRoutes);
 app.use(checkLoggedInUser, categoryRoutes);
 app.use(checkLoggedInUser, cartRoutes);
+app.use(checkLoggedInUser, checkoutRoutes);
 
 mongoose
   .connect("mongodb://matan:123456@localhost:27017/anime-db?authSource=admin")
