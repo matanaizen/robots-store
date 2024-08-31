@@ -16,6 +16,7 @@ const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
 const cartRoutes = require("./routes/cart");
 const checkoutRoutes = require("./routes/checkout");
+const aboutRoutes = require("./routes/about");
 
 const app = express();
 
@@ -57,6 +58,7 @@ app.use(userRoutes);
 app.use(checkLoggedInUser, categoryRoutes);
 app.use(checkLoggedInUser, cartRoutes);
 app.use(checkLoggedInUser, checkoutRoutes);
+app.use(checkLoggedInUser, aboutRoutes);
 
 mongoose
   .connect("mongodb://matan:123456@localhost:27017/anime-db?authSource=admin")

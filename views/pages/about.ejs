@@ -1,0 +1,94 @@
+<!-- views/pages/about.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../partials/head-links') %>
+    <style>
+      #map {
+        height: 400px;
+        width: 100%;
+      }
+    </style>
+    <title>About Us</title>
+  </head>
+  <body>
+    <%- include('../partials/header') %>
+
+    <main class="about-container">
+      <h1>About Our Store</h1>
+      <p>
+        Welcome to our store! Here you can find information about our branches.
+      </p>
+
+      <section class="branches-container">
+        <h2>Our Branches</h2>
+        <ul class="branch-list">
+          <% branches.forEach(branch => { %>
+          <li class="branch-item">
+            <h3><%= branch.name %></h3>
+            <p><strong>Address:</strong> <%= branch.address %></p>
+            <p><strong>Phone:</strong> <%= branch.phone %></p>
+
+            <% if (branch.weather) { %>
+            <p>
+              <strong>Weather:</strong> <%=
+              branch.weather.weather[0].description %>, <%=
+              branch.weather.main.temp %>°C
+            </p>
+            <% } else { %>
+            <p><strong>Weather:</strong> Not available</p>
+            <% } %>
+          </li>
+          <% }) %>
+        </ul>
+      </section>
+      <section>
+        <h2>Our Branches On A Map</h2>
+        <div id="map"></div>
+      </section>
+    </main>
+
+    <script>
+      function initMap() {
+        fetch("/branches")
+          .then((response) => response.json())
+          .then((branches) => {
+            const map = new google.maps.Map(document.getElementById("map"), {
+              zoom: 10,
+              center: {
+                lat: branches[0].lat,
+                lng: branches[0].lng,
+              },
+            });
+
+            branches.forEach((branch) => {
+              const marker = new google.maps.Marker({
+                position: { lat: branch.lat, lng: branch.lng },
+                map: map,
+                title: branch.name,
+              });
+
+              const infowindow = new google.maps.InfoWindow({
+                content: branch.name,
+              });
+
+              marker.addListener("click", () => {
+                infowindow.open(map, marker);
+                map.setZoom(11);
+                map.setCenter(marker.getPosition());
+              });
+            });
+          })
+          .catch((error) => console.error("Error fetching city data:", error));
+      }
+    </script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMfCHWjir75985EdgfQxS_P3LQ_kdFzjA&callback=initMap"
+      async
+      defer
+    ></script>
+    <%- include('../partials/footer') %>
+  </body>
+</html>
