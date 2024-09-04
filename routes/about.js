@@ -29,7 +29,10 @@ router.get("/about", async (req, res) => {
       })
     );
 
-    res.render("pages/about", { branches: branchesWithWeather });
+    res.render("pages/about", {
+      branches: branchesWithWeather,
+      apiKey: process.env.GOOGLE_MAPS_API_KEY
+    });
   } catch (error) {
     res.status(500).send("Server error");
   }

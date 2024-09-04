@@ -4,6 +4,8 @@ const cors = require("cors");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const path = require("path");
+require('dotenv').config();
+
 
 const seedDatabase = require("./seed");
 

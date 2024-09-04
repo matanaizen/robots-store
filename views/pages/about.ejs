@@ -1,10 +1,11 @@
 <!-- views/pages/about.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%- include('../partials/head-links') %>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('../partials/head-links') %>
     <style>
       #map {
         height: 400px;
@@ -12,9 +13,10 @@
       }
     </style>
     <title>About Us</title>
-  </head>
-  <body>
-    <%- include('../partials/header') %>
+</head>
+
+<body>
+  <%- include('../partials/header') %>
 
     <main class="about-container">
       <h1>About Our Store</h1>
@@ -25,23 +27,28 @@
       <section class="branches-container">
         <h2>Our Branches</h2>
         <ul class="branch-list">
-          <% branches.forEach(branch => { %>
-          <li class="branch-item">
-            <h3><%= branch.name %></h3>
-            <p><strong>Address:</strong> <%= branch.address %></p>
-            <p><strong>Phone:</strong> <%= branch.phone %></p>
+          <% branches.forEach(branch=> { %>
+            <li class="branch-item">
+              <h3>
+                <%= branch.name %>
+              </h3>
+              <p><strong>Address:</strong>
+                <%= branch.address %>
+              </p>
+              <p><strong>Phone:</strong>
+                <%= branch.phone %>
+              </p>
 
-            <% if (branch.weather) { %>
-            <p>
-              <strong>Weather:</strong> <%=
-              branch.weather.weather[0].description %>, <%=
-              branch.weather.main.temp %>°C
-            </p>
-            <% } else { %>
-            <p><strong>Weather:</strong> Not available</p>
-            <% } %>
-          </li>
-          <% }) %>
+              <% if (branch.weather) { %>
+                <p>
+                  <strong>Weather:</strong>
+                  <%= branch.weather.weather[0].description %>, <%= branch.weather.main.temp %>°C
+                </p>
+                <% } else { %>
+                  <p><strong>Weather:</strong> Not available</p>
+                  <% } %>
+            </li>
+            <% }) %>
         </ul>
       </section>
       <section>
@@ -84,11 +91,9 @@
           .catch((error) => console.error("Error fetching city data:", error));
       }
     </script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMfCHWjir75985EdgfQxS_P3LQ_kdFzjA&callback=initMap"
-      async
-      defer
-    ></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap" async defer></script>
+
     <%- include('../partials/footer') %>
-  </body>
+</body>
+
 </html>
