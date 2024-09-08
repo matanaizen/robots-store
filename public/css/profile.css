@@ -1,0 +1,61 @@
+.profile-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.profile-container h1 {
+  font-size: 3em;
+  color: #4caf50;
+  margin-bottom: 30px;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-item {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.order-item h2 {
+  font-size: 1.8em;
+  color: #4caf50;
+  margin-bottom: 10px;
+}
+
+.order-item p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.order-item ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.order-item ul li {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+/* התאמה למובייל */
+@media (max-width: 768px) {
+  .profile-container h1 {
+    font-size: 2.5em;
+  }
+
+  .order-item h2 {
+    font-size: 1.5em;
+  }
+}
