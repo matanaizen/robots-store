@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../partials/head-links') %>
+    <title>Admin Area</title>
+  </head>
+  <body>
+    <%- include('../partials/header') %>
+
+    <main class="admin-container">
+      <h1>Admin Area</h1>
+
+      <!-- Orders Section -->
+      <section class="orders-container">
+        <h2>All Orders</h2>
+        <div class="order-list">
+          <% orders.forEach(order => { %>
+          <div class="order-item">
+            <h3>Order ID: <%= order._id %></h3>
+            <p>
+              <strong>User:</strong> <%= order.user.name %> (<%=
+              order.user.email %>)
+            </p>
+            <p><strong>Total Amount:</strong> $<%= order.totalAmount %></p>
+            <p><strong>Items:</strong></p>
+            <ul>
+              <% order.items.forEach(item => { %>
+              <li><%= item.product.name %> - Quantity: <%= item.quantity %></li>
+              <% }) %>
+            </ul>
+          </div>
+          <% }) %>
+        </div>
+      </section>
+    <%- include('../partials/footer') %>
+  </body>
+</html>
