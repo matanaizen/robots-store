@@ -120,5 +120,102 @@ $(document).ready(function () {
       },
     });
   });
+
+  $(document).on("click", ".add-category-button", function () {
+    $("#addCategoryModal").show();
+  });
+
+  $(document).on("click", ".add-product-button", function () {
+    $("#addProductModal").show();
+  });
+
+  $(document).on(
+    "click",
+    ".edit-category-button, .edit-product-button",
+    function () {
+      const isProduct = $(this).hasClass("edit-product-button");
+      const itemId = $(this).data(isProduct ? "product-id" : "category-id");
+      const name = $(this).data(isProduct ? "product-name" : "category-name");
+      const description = $(this).data(
+        isProduct ? "product-description" : "category-description"
+      );
+
+      $("#editItemId").val(itemId);
+      $("#editName").val(name);
+      $("#editDescription").val(description);
+
+      if (isProduct) {
+        const price = $(this).data("product-price");
+        const imageUrl = $(this).data("product-imageurl");
+        const categoryId = $(this).data("product-category");
+
+        $("#editPrice").val(price);
+        $("#editImageUrl").val(imageUrl);
+        $(`#editProductCategory`).val(categoryId);
+
+        $(".product-only").show();
+      } else {
+        $(".product-only").hide();
+      }
+
+      $("#editModal").show();
+    }
+  );
+
+  $(".close-button").on("click", function () {
+    $(".modal").hide();
+  });
+
+  $("#addCategoryForm").on("submit", function (event) {
+    event.preventDefault();
+
+    const name = $("#addCategoryName").val();
+    const description = $("#addCategoryDescription").val();
+
+    $.ajax({
+      url: "/admin/categories",
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({ name, description }),
+      success: function () {
+        alert("Category added successfully!");
+        $("#addCategoryModal").hide();
+        location.reload();
+      },
+      error: function (xhr) {
+        alert("Error: " + xhr.responseText);
+      },
     });
   });
+
+    });
+  });
+
+  $(document).on("click", ".delete-category-button", function () {
+    const categoryId = $(this).data("category-id");
+
+    if (confirm("Are you sure you want to delete this category?")) {
+      $.ajax({
+        url: `/admin/categories/${categoryId}`,
+        method: "DELETE",
+        success: function () {
+          alert("Category deleted!");
+          location.reload();
+        },
+        error: function (xhr) {
+          alert("Error: " + xhr.responseText);
+        },
+      });
+    }
+  });
+
+function updateCartTotal() {
+  let total = 0;
+  $(".cart-item").each(function () {
+    const itemTotal = parseFloat(
+      $(this).find(".cart-item-total").text().replace("Total: $", "")
+    );
+    total += itemTotal;
+  });
+  $(".cart-total p").text(`Total: $${total.toFixed(2)}`);
+}

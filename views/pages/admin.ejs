@@ -34,6 +34,91 @@
           <% }) %>
         </div>
       </section>
+
+      <!-- Categories Section -->
+      <section class="categories-container">
+        <h2>Categories</h2>
+        <button class="add-category-button">Add Category</button>
+        <ul class="category-list">
+          <% categories.forEach(category => { %>
+          <li>
+            <div>
+              <div>Id:<b> <%= category._id %></b></div>
+              <%= category.name %> - <%= category.description %>
+            </div>
+            <div class="category-buttons-container">
+              <button
+                class="edit-category-button"
+                data-category-id="<%= category._id %>"
+                data-category-name="<%= category.name %>"
+                data-category-description="<%= category.description %>"
+              >
+                Edit
+              </button>
+              <button
+                class="delete-category-button"
+                data-category-id="<%= category._id %>"
+              >
+                Delete
+              </button>
+            </div>
+          </li>
+          <% }) %>
+        </ul>
+      </section>
+    <!-- Add Category Modal -->
+    <div id="addCategoryModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Add Category</h2>
+        <form id="addCategoryForm">
+          <div class="form-group">
+            <label for="addCategoryName">Name</label>
+            <input type="text" id="addCategoryName" required />
+          </div>
+          <div class="form-group">
+            <label for="addCategoryDescription">Description</label>
+            <textarea id="addCategoryDescription" required></textarea>
+          </div>
+          <button type="submit" class="save-button">Add Category</button>
+        </form>
+      </div>
+    </div>
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Edit Item</h2>
+        <form id="editForm">
+          <input type="hidden" id="editItemId" />
+          <div class="form-group">
+            <label for="editName">Name</label>
+            <input type="text" id="editName" required />
+          </div>
+          <div class="form-group">
+            <label for="editDescription">Description</label>
+            <textarea id="editDescription" required></textarea>
+          </div>
+          <div class="form-group product-only">
+            <label for="editPrice">Price</label>
+            <input type="number" id="editPrice" step="0.01" />
+          </div>
+          <div class="form-group product-only">
+            <label for="editImageUrl">Image URL</label>
+            <input type="url" id="editImageUrl" />
+          </div>
+          <div class="form-group product-only">
+            <label for="editProductCategory">Category</label>
+            <select id="editProductCategory" required>
+              <% categories.forEach(category => { %>
+              <option value="<%= category._id %>"><%= category.name %></option>
+              <% }) %>
+            </select>
+          </div>
+          <button type="submit" class="save-button">Save Changes</button>
+        </form>
+      </div>
+    </div>
+
     <%- include('../partials/footer') %>
   </body>
 </html>
