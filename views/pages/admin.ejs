@@ -66,6 +66,50 @@
           <% }) %>
         </ul>
       </section>
+
+      <!-- Products Section -->
+      <section class="products-container">
+        <h2>Products</h2>
+        <button class="add-product-button">Add Product</button>
+        <ul class="product-list">
+          <% products.forEach(product => { %>
+          <li>
+            <img
+              src="<%= product.imageUrl %>"
+              alt="<%= product.name %>"
+              class="product-image"
+            />
+            <div class="product-info-container">
+              <div class="product-details">
+                <strong><%= product.name %></strong> - <%= product.description
+                %> - $<%= product.price %>
+              </div>
+              <div class="product-actions">
+                <button
+                  class="edit-product-button"
+                  data-product-id="<%= product._id %>"
+                  data-product-name="<%= product.name %>"
+                  data-product-description="<%= product.description %>"
+                  data-product-price="<%= product.price %>"
+                  data-product-imageurl="<%= product.imageUrl %>"
+                  data-product-category="<%= product.category.id %>"
+                >
+                  Edit
+                </button>
+                <button
+                  class="delete-product-button"
+                  data-product-id="<%= product._id %>"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </li>
+          <% }) %>
+        </ul>
+      </section>
+    </main>
+
     <!-- Add Category Modal -->
     <div id="addCategoryModal" class="modal">
       <div class="modal-content">
@@ -84,6 +128,43 @@
         </form>
       </div>
     </div>
+
+    <!-- Add Product Modal -->
+    <div id="addProductModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Add Product</h2>
+        <form id="addProductForm">
+          <div class="form-group">
+            <label for="addProductName">Name</label>
+            <input type="text" id="addProductName" required />
+          </div>
+          <div class="form-group">
+            <label for="addProductDescription">Description</label>
+            <textarea id="addProductDescription" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="addProductPrice">Price</label>
+            <input type="number" id="addProductPrice" step="0.01" required />
+          </div>
+          <div class="form-group">
+            <label for="addProductImageUrl">Image URL</label>
+            <input type="url" id="addProductImageUrl" required />
+          </div>
+          <div class="form-group">
+            <label for="addProductCategory">Category</label>
+            <select id="addProductCategory" required>
+              <% categories.forEach(category => { %>
+              <option value="<%= category._id %>"><%= category.name %></option>
+              <% }) %>
+            </select>
+          </div>
+          <button type="submit" class="save-button">Add Product</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Edit Modal (for both categories and products) -->
     <div id="editModal" class="modal">
       <div class="modal-content">
         <span class="close-button">&times;</span>

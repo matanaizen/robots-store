@@ -188,6 +188,62 @@ $(document).ready(function () {
     });
   });
 
+  $("#addProductForm").on("submit", function (event) {
+    event.preventDefault();
+
+    const name = $("#addProductName").val();
+    const description = $("#addProductDescription").val();
+    const price = $("#addProductPrice").val();
+    const imageUrl = $("#addProductImageUrl").val();
+    const category = $("#addProductCategory").val();
+
+    $.ajax({
+      url: "/admin/products",
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({ name, description, price, category, imageUrl }),
+      success: function () {
+        alert("Product added successfully!");
+        $("#addProductModal").hide();
+        location.reload();
+      },
+      error: function (xhr) {
+        alert("Error: " + xhr.responseText);
+      },
+    });
+  });
+
+  $("#editForm").on("submit", function (event) {
+    event.preventDefault();
+
+    const isProduct = $(".product-only").is(":visible");
+    const itemId = $("#editItemId").val();
+    const name = $("#editName").val();
+    const description = $("#editDescription").val();
+    const price = $("#editPrice").val();
+    const imageUrl = $("#editImageUrl").val();
+    const category = $("#editProductCategory").val();
+
+    const url = isProduct
+      ? `/admin/products/${itemId}`
+      : `/admin/categories/${itemId}`;
+    const data = isProduct
+      ? { name, description, price, imageUrl, category }
+      : { name, description };
+
+    $.ajax({
+      url: url,
+      method: "PUT",
+      contentType: "application/json",
+      data: JSON.stringify(data),
+      success: function () {
+        alert("Item updated successfully!");
+        $("#editModal").hide();
+        location.reload();
+      },
+      error: function (xhr) {
+        alert("Error: " + xhr.responseText);
+      },
     });
   });
 
@@ -201,6 +257,87 @@ $(document).ready(function () {
         success: function () {
           alert("Category deleted!");
           location.reload();
+        },
+        error: function (xhr) {
+          alert("Error: " + xhr.responseText);
+        },
+      });
+    }
+  });
+
+  $(document).on("click", ".delete-product-button", function () {
+    const productId = $(this).data("product-id");
+
+    if (confirm("Are you sure you want to delete this product?")) {
+      $.ajax({
+        url: `/admin/products/${productId}`,
+        method: "DELETE",
+        success: function () {
+          alert("Product deleted!");
+          location.reload();
+        },
+        error: function (xhr) {
+          alert("Error: " + xhr.responseText);
+        },
+      });
+    }
+  });
+});
+
+$(document).on("click", ".update-quantity-button", function () {
+  const productId = $(this).data("product-id");
+  const quantity = parseInt($(`#quantity-${productId}`).val(), 10);
+
+  if (isNaN(quantity) || quantity < 1) {
+    alert("Please enter a valid quantity (minimum 1).");
+    return;
+  }
+
+  $.ajax({
+    url: "/cart/update",
+    method: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({ productId, quantity }),
+    success: function () {
+      const productPrice = parseFloat(
+        $(`#quantity-${productId}`)
+          .closest(".cart-item")
+          .find(".cart-item-price")
+          .text()
+          .replace("Price: $", "")
+      );
+
+      $(`#quantity-${productId}`)
+        .closest(".cart-item")
+        .find(".cart-item-total")
+        .text(`Total: $${(quantity * productPrice).toFixed(2)}`);
+
+      updateCartTotal();
+    },
+    error: function (xhr) {
+      alert("Error: " + xhr.responseText);
+    },
+  });
+});
+
+$(document).on("click", ".remove-item-button", function () {
+  const productId = $(this).data("product-id");
+
+  if (confirm("Are you sure you want to remove this item from your cart?")) {
+    $.ajax({
+      url: "/cart/remove",
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({ productId }),
+      success: function () {
+        $(`#quantity-${productId}`).closest(".cart-item").remove();
+
+        updateCartTotal();
+
+        if ($(".cart-item").length === 0) {
+          $(".cart-list").html("<p>Your cart is empty.</p>");
+          $(".cart-total").remove();
+        }
         },
         error: function (xhr) {
           alert("Error: " + xhr.responseText);
