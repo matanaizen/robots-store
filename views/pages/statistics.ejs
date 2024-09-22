@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Statistics</title>
+    <%- include('../partials/head-links') %>
+  </head>
+  <body>
+    <%- include('../partials/header') %>
+
+    <main class="statistics-container">
+      <h1>Sales Statistics</h1>
+
+      <h2>Total Quantity Sold by Product</h2>
+      <canvas
+        id="salesChart"
+        data-sales="<%= JSON.stringify(salesData) %>"
+      ></canvas>
+
+      <h2>Sales by Category</h2>
+      <canvas
+        id="categorySalesChart"
+        data-category-sales="<%= JSON.stringify(categorySalesData) %>"
+      ></canvas>
+    </main>
+
+    <%- include('../partials/footer') %>
+  </body>
+</html>

@@ -338,13 +338,13 @@ $(document).on("click", ".remove-item-button", function () {
           $(".cart-list").html("<p>Your cart is empty.</p>");
           $(".cart-total").remove();
         }
-        },
-        error: function (xhr) {
-          alert("Error: " + xhr.responseText);
-        },
-      });
-    }
-  });
+      },
+      error: function (xhr) {
+        alert("Error: " + xhr.responseText);
+      },
+    });
+  }
+});
 
 function updateCartTotal() {
   let total = 0;
@@ -356,3 +356,98 @@ function updateCartTotal() {
   });
   $(".cart-total p").text(`Total: $${total.toFixed(2)}`);
 }
+
+$(document).ready(function () {
+  const salesChartElement = document.getElementById("salesChart");
+
+  if (salesChartElement) {
+    const salesData = JSON.parse(salesChartElement.getAttribute("data-sales"));
+
+    const labels = salesData.map((item) => item.product.name);
+    const quantities = salesData.map((item) => item.totalQuantity);
+
+    const ctx = salesChartElement.getContext("2d");
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Total Quantity Sold",
+            data: quantities,
+            backgroundColor: "rgba(75, 192, 192, 0.2)",
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  }
+
+  const categorySalesElement = document.getElementById("categorySalesChart");
+  if (categorySalesElement) {
+    const categorySalesData = JSON.parse(
+      categorySalesElement.getAttribute("data-category-sales")
+    );
+
+    const ctx = categorySalesElement.getContext("2d");
+
+    if (categorySalesData.length === 0) {
+      categorySalesData.push({
+        name: "No Sales Data",
+        totalSales: 1,
+      });
+    }
+
+    new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: categorySalesData.map((item) => item.name),
+        datasets: [
+          {
+            data: categorySalesData.map((item) => item.totalSales),
+            backgroundColor: [
+              "#FF6384",
+              "#36A2EB",
+              "#FFCE56",
+              "#4BC0C0",
+              "#9966FF",
+            ],
+            hoverBackgroundColor: [
+              "#FF6384",
+              "#36A2EB",
+              "#FFCE56",
+              "#4BC0C0",
+              "#9966FF",
+            ],
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "top",
+          },
+          tooltip: {
+            callbacks: {
+              label: function (tooltipItem) {
+                if (tooltipItem.label === "No Sales Data") {
+                  return "No sales data available";
+                }
+                return `${tooltipItem.label}: ${tooltipItem.raw}`;
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+});
