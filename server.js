@@ -6,9 +6,6 @@ const MongoStore = require("connect-mongo");
 const path = require("path");
 require('dotenv').config();
 
-
-const seedDatabase = require("./seed");
-
 const checkLoggedInUser = require("./middleware/checkLoggedInUser");
 
 const Category = require("./models/category");
@@ -83,4 +80,4 @@ app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
 
-seedDatabase();
+

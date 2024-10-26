@@ -1,10 +1,16 @@
+const mongoose = require("mongoose");
 const Category = require("./models/category");
 const Product = require("./models/product");
 const Order = require("./models/order");
 const User = require("./models/user");
 const Branch = require("./models/branch");
 
-module.exports = async function () {
+const initDb = async function () {
+  await mongoose
+  .connect("mongodb://matan:123456@localhost:27017/robots-db?authSource=admin")
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.log(err));
+
   await Category.deleteMany({});
   await Product.deleteMany({});
   await Order.deleteMany({});
@@ -230,3 +236,5 @@ module.exports = async function () {
     "Database seeded with categories, products, users, and branches!"
   );
 };
+
+initDb();
