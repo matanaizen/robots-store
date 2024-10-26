@@ -45,7 +45,7 @@ app.use(
     saveUninitialized: false,
     store: MongoStore.create({
       mongoUrl:
-        "mongodb://matan:123456@localhost:27017/anime-db?authSource=admin",
+        "mongodb://matan:123456@localhost:27017/robots-db?authSource=admin",
       ttl: 24 * 60 * 60, // 1 day
     }),
     cookie: {
@@ -69,7 +69,7 @@ app.use(checkLoggedInUser, statisticsRoutes);
 app.use(checkLoggedInUser, aboutRoutes);
 
 mongoose
-  .connect("mongodb://matan:123456@localhost:27017/anime-db?authSource=admin")
+  .connect("mongodb://matan:123456@localhost:27017/robots-db?authSource=admin")
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log(err));
 
